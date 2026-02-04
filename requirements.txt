@@ -1,0 +1,5 @@
+# id_checker - Dependencias
+# tkinter viene incluido con Python, no requiere instalación adicional
+
+# Para crear ejecutable (opcional):
+# pyinstaller>=6.0.0

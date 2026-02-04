@@ -1,115 +1,108 @@
-# CLAUDE.md - AI Assistant Guide for id_checker
+# CLAUDE.md - Guía para AI Assistant en id_checker
 
-This file provides guidance for AI assistants working with the id_checker repository.
+## Descripción del Proyecto
 
-## Project Overview
+**id_checker** es una aplicación de escritorio con GUI para comparar IDs entre dos archivos CSV y mostrar las diferencias.
 
-**id_checker** is a new project currently in initial setup phase. The repository has been initialized but awaits implementation.
+**Repositorio**: Zartch/id_checker
+**Lenguaje**: Python 3.10+
+**Framework GUI**: tkinter (incluido en Python)
 
-**Repository**: Zartch/id_checker
-**Status**: New project - no source code yet
+## Cómo Ejecutar
 
-## Project Purpose
+```bash
+python id_checker.py
+```
 
-Based on the project name, this appears to be intended as an ID validation/checking utility. The specific implementation details and requirements should be defined as the project develops.
+No requiere instalación de dependencias externas.
 
-## Development Guidelines
-
-### Getting Started
-
-When this project has code, update this section with:
-- Prerequisites and system requirements
-- Installation steps
-- Development environment setup
-- How to run the application locally
-
-### Code Style and Conventions
-
-As code is added, document:
-- Programming language(s) used
-- Code formatting standards (linter configurations)
-- Naming conventions for files, functions, and variables
-- Import ordering and organization
-
-### Project Structure
+## Estructura del Proyecto
 
 ```
 id_checker/
-├── CLAUDE.md          # This file - AI assistant guide
-└── (awaiting initial implementation)
+├── CLAUDE.md              # Esta guía
+├── requirements.txt       # Dependencias (solo para empaquetado opcional)
+├── id_checker.py          # Punto de entrada principal
+├── src/
+│   ├── __init__.py
+│   ├── csv_parser.py      # Lectura y validación de CSV
+│   ├── comparator.py      # Lógica de comparación de IDs
+│   ├── history_manager.py # Gestión de archivos históricos
+│   └── ui/
+│       ├── __init__.py
+│       └── main_window.py # Ventana principal
+└── resultados/            # Archivos históricos de comparaciones
 ```
 
-Update this structure as the project grows.
+## Formato de CSV Esperado
 
-### Testing
+- **Delimitador**: punto y coma (`;`)
+- **Encoding**: UTF-8
+- **Columnas**: exactamente 1 columna
+- **Cabecera**: sí, primera fila es cabecera
 
-Document testing practices once established:
-- Testing framework(s) used
-- How to run tests
-- Test file naming conventions
-- Coverage requirements
+Ejemplo válido:
+```csv
+id
+ABC123
+DEF456
+XYZ789
+```
 
-### Build and Deployment
+## Lógica de Comparación
 
-Add build instructions when applicable:
-- Build commands
-- Environment variables
-- Deployment procedures
+- **Case insensitive**: `ABC123` y `abc123` son el mismo ID
+- **Trim automático**: se eliminan espacios al inicio/final
+- **Duplicados**: se detectan y muestran por separado
+
+## Convenciones de Código
+
+### Estilo
+
+- Python 3.10+ con type hints
+- Nombres de funciones y variables en snake_case
+- Clases en PascalCase
+- Docstrings en español para módulos, inglés técnico aceptable en código
+
+### Imports
+
+1. Biblioteca estándar
+2. Terceros (si los hubiera)
+3. Módulos locales
+
+### Principios
+
+- SOLID
+- Funciones pequeñas con nombres autoexplicativos
+- Comentarios solo cuando el código no se explica solo
+- Sin over-engineering
 
 ## Git Workflow
 
-### Branch Naming
+### Commits
 
-- Feature branches: `feature/<description>`
-- Bug fixes: `fix/<description>`
-- Claude AI branches: `claude/<session-id>`
+Formato conventional commits:
+- `feat:` - Nueva funcionalidad
+- `fix:` - Corrección de bugs
+- `docs:` - Documentación
+- `refactor:` - Refactorización
+- `chore:` - Mantenimiento
 
-### Commit Messages
+### Branches
 
-Follow conventional commit format:
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `docs:` - Documentation changes
-- `test:` - Test additions/changes
-- `refactor:` - Code refactoring
-- `chore:` - Maintenance tasks
+- Features: `feature/<descripcion>`
+- Fixes: `fix/<descripcion>`
+- Claude: `claude/<session-id>`
 
-### Pull Requests
+## Archivos Históricos
 
-- Provide clear descriptions of changes
-- Reference related issues
-- Ensure tests pass before merging
+- **Ubicación**: carpeta `resultados/` junto al ejecutable
+- **Formato nombre**: `id_checker_diff_YYYY-MM-DD_HHMMSS.txt`
+- **Contenido**: texto plano legible
 
-## AI Assistant Instructions
+## Notas para el AI Assistant
 
-### When Working on This Project
-
-1. **Read First**: Always read relevant files before making changes
-2. **Understand Context**: Check existing patterns and conventions
-3. **Test Changes**: Run tests after modifications
-4. **Keep It Simple**: Avoid over-engineering; make minimal necessary changes
-5. **Security**: Never commit sensitive data (API keys, credentials)
-
-### Common Tasks
-
-Update this section with project-specific workflows as they are established.
-
-### Files to Avoid Modifying
-
-List any files that should not be modified by AI assistants (e.g., generated files, lock files that shouldn't be manually edited).
-
-## Dependencies
-
-Document key dependencies as they are added to the project.
-
-## Environment Variables
-
-List required environment variables and their purposes.
-
-## Troubleshooting
-
-Add common issues and solutions as the project develops.
-
----
-
-*This CLAUDE.md should be updated as the project evolves to reflect current structure, conventions, and workflows.*
+1. Mantener la simplicidad - evitar abstracciones innecesarias
+2. El código debe autoexplicarse con nombres claros
+3. Preferir editar archivos existentes antes que crear nuevos
+4. Probar cambios antes de commitear
